@@ -2,7 +2,7 @@ package actividad2;
 
 public class Item extends Producto{
 	
-	int cantidadDeCompra;
+	int cantidadDeCompra = 0;
 
 	public Item() {
 		super();
@@ -10,13 +10,9 @@ public class Item extends Producto{
 	
 	public Item(String nombre, int cantidadDisponible, int precioUnitario) {
 		super(nombre, cantidadDisponible, precioUnitario);
-		this.cantidadDeCompra = 0;
 	}
 
-	public Item(String nombre, int cantidadDisponible, int precioUnitario, int cantidadDeCompra) {
-		super(nombre, cantidadDisponible, precioUnitario);
-		this.cantidadDeCompra = cantidadDeCompra;
-	}
+	
 
 	/**
 	 * @return the cantidadDeCompra
@@ -43,9 +39,5 @@ public class Item extends Producto{
 		return "\n\t\tNombre: " + nombre + "\n\t\tPrecio Unitario: " + precioUnitario + "\n\t\tCantidad de Compra: " + cantidadDeCompra + "\n";
 	}
 	
-	@Override
-	public String toString() {
-		return mostrarProducto() + "\n\tCantidad de Compra: " + cantidadDeCompra + "\n";
-	}
 	
 }

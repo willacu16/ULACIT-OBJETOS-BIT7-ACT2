@@ -61,7 +61,7 @@ public class Carrito {
 		this.items = items;
 	}
 	
-	public String mostrarItems() {
+	public String listarItems() {
 		String values = "";
 		for (Item item : items) {
 			values = values + item.mostrarItem();
@@ -69,9 +69,8 @@ public class Carrito {
 		return values;
 	}
 
-	@Override
-	public String toString() {
-		return "\tid=" + id + "\n\tcliente=" + cliente.toString() + "\n\titems=[" + mostrarItems() + "\t\t]";
+	public String mostrarCarrito() {
+		return "\tid=" + id + "\n\tcliente=" + cliente.getNombre() + ", ced: " + cliente.getCed() + "\n\titems=[" + listarItems() + "\t\t]";
 	}
 	
 	

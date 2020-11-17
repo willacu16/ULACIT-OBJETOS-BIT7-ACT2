@@ -91,9 +91,8 @@ public class Cliente{
 		this.correo = correo;
 	}
 
-	@Override
-	public String toString() {
-		return "\n\t\tced=" + ced + "\n\t\tnombre=" + nombre + "\n\t\tdireccion=" + direccion + "\n\t\ttelefono=" + telefono + "\n\t\tcorreo=" + correo;
+	public String mostrarCliente() {
+		return "\n\tCédula: " + ced + "\n\tNombre: " + nombre + "\n\tDirección: " + direccion + "\n\ttelefono: " + telefono + "\n\tcorreo: " + correo;
 	}
 	
 	

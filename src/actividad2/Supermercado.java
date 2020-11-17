@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Supermercado {
 	
 	Productos productos = new Productos();
-	ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+	Clientes clientes = new Clientes();
 	ArrayList<Carrito> carritos = new ArrayList<Carrito>();
 	
 	public Supermercado() {
@@ -31,14 +31,14 @@ public class Supermercado {
 	/**
 	 * @return the clientes
 	 */
-	public ArrayList<Cliente> getClientes() {
+	public Clientes getClientes() {
 		return clientes;
 	}
 
 	/**
 	 * @param clientes the clientes to set
 	 */
-	public void setClientes(ArrayList<Cliente> clientes) {
+	public void setClientes(Clientes clientes) {
 		this.clientes = clientes;
 	}	
 	
@@ -57,7 +57,7 @@ public class Supermercado {
 	}
 
 	public boolean validarCliente(String ced) {
-		for (Cliente cliente : clientes) {
+		for (Cliente cliente : clientes.listaClientes) {
 			if (cliente.getCed().equals(ced)) {
 				return true;
 			}
@@ -77,6 +77,7 @@ public class Supermercado {
 	public Carrito agregarCarrito(Carrito carrito) {
 		
 		try {
+			Boolean productoDisponible = false;
 			Item newItem = new Item();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
 			String nombre = "";
@@ -87,6 +88,7 @@ public class Supermercado {
 	        
 	        for (Item item: productos.items) {
 	        	if (item.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+	        		productoDisponible = true;
 	        		System.out.println("Digite la cantidad a comprar [max = " + item.getCantidadDisponible() + "]:");
 	    	        cantidad = Integer.valueOf(reader.readLine());
 	    	        
@@ -105,10 +107,13 @@ public class Supermercado {
 	    	        }
 				}
 	        }
+	        if (!productoDisponible) {
+	        	System.out.println("ERR: Producto solicitado [" + nombre + "] no disponible! Intente de nuevo!");
+	        }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return carrito;
 	}
 	
 	

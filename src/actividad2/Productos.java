@@ -21,7 +21,7 @@ public class Productos extends CRUD{
 			boolean encontrada = false;
 			for (Item p : items) {
 				if (p.getNombre().toLowerCase().equals(nombre.toLowerCase())) {
-					System.out.println(p.toString());
+					System.out.println(p.mostrarProducto());
 					encontrada = true;
 		        }
 			}
@@ -85,14 +85,84 @@ public class Productos extends CRUD{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
+			System.out.println("Digite el nombre del producto a actualizar:");
+			String nombre = reader.readLine();
+			
+			int index = -1;
+			for (int i=0; i < items.size(); i++) {
+				if (items.get(i).getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+					index = i;
+				}
+			}
+			
+			if (index != -1) {
+				Item viejoItem = items.get(index);
+				Item nuevoItem = new Item();
+				String input = "";
+				
+				System.out.println("Digite el nuevo nombre para [" + viejoItem.getNombre() + "] o presione ENTER para no modificar:");
+		        input = reader.readLine();
+		        if (input.isEmpty()) {
+		        	nuevoItem.setNombre(viejoItem.getNombre());
+		        } else {
+		        	nuevoItem.setNombre(input);
+		        }
+		        
+		        System.out.println("Digite la nueva Cantidad Disponible del producto [Cantidad actual = " + viejoItem.getCantidadDisponible() + "] o presione ENTER para no modificar:");
+		        input = reader.readLine();
+		        if (input.isEmpty()) {
+		        	nuevoItem.setCantidadDisponible(viejoItem.getCantidadDisponible());
+		        } else {
+		        	nuevoItem.setCantidadDisponible(Integer.valueOf(input));
+		        }
+		        
+		        System.out.println("Digite el nuevo Precio Unitario del producto [Precio actual = " + viejoItem.getPrecioUnitario() + "] o presione ENTER para no modificar:");
+		        input = reader.readLine();
+		        if (input.isEmpty()) {
+		        	nuevoItem.setPrecioUnitario(viejoItem.getPrecioUnitario());
+		        } else {
+		        	nuevoItem.setPrecioUnitario(Integer.valueOf(input));
+		        }
+		        
+		        items.set(index, nuevoItem);
+		        System.out.println("Producto [" + nuevoItem.getNombre() + "] actualizado!");
+			} else {
+				System.out.println("ERR: Producto no encontrado!");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	@Override
 	public void delete() {
-		// TODO Auto-generated method stub
-		
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)); 
+			System.out.println("Digite el nombre del producto a eliminar:");
+			String nombre = reader.readLine();
+			
+			int index = -1;
+			for (int i=0; i < items.size(); i++) {
+				if (items.get(i).getNombre().toLowerCase().equals(nombre.toLowerCase())) {
+					index = i;
+				}
+			}
+			
+			if (index != -1) {
+				try {
+					items.remove(index);
+					System.out.println("Producto eliminado!");
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+			} else {
+				System.out.println("ERR: Producto no encontrado!");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 }
